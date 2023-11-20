@@ -1,0 +1,18 @@
+#userCard {
+    background-color: rgb(247, 247, 247);
+    border: ridge 2px #cacaca;
+    border-radius: 20px;
+}
+
+#results {
+    font-weight: bold;
+    height: 100px;
+}
+
+#searchResultsHeader{
+    text-align: center;
+}
+
+#numberOfResults{
+    color:rgb(175, 175, 175);
+}

@@ -1,0 +1,72 @@
+#profilePicture {
+    height: 15rem;
+    width: 15rem;
+    border: 1px solid lightgray;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.cardHeader {
+    background: #93e4f3;
+    text-align: left;
+}
+
+#friends{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#bio{
+    text-align: center;
+    padding-right: 20%;
+}
+
+#accountBody{
+    background-color: #EFEFEF;
+}
+
+.gift-form {
+   width: 100%
+}
+
+.activity-link {
+    color: inherit;
+}
+.fileSelector{
+    padding-left: 20px;
+}
+  
+.overlay {
+    position: absolute;
+    transition: all 0.5s ease;
+    opacity: 0;
+    cursor: pointer;
+}
+  
+.profileArea:hover .overlay {
+    opacity: .75;
+}
+  
+.overlayFade {
+    height: 15rem;
+    width: 15rem;
+    top: 0;
+    left: 0px;
+}
+  
+.profileArea {
+    position: relative;
+    height: 15rem;
+    width: 15rem;
+    border-radius: 50%;
+}
+.timestamp {
+    text-align: right;
+    font-size: small;
+    color: grey;
+}
+.activityCard {
+    max-height: 350px;
+    overflow-y: auto;
+}

@@ -1,0 +1,360 @@
+.content-container {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ccaption-container {
+    overflow-x: auto;
+}
+
+
+.gift-lg-funds {
+    font-size: 30px;
+}
+
+.gift-sm-funds {
+    font-size: 20px;
+}
+
+.gift-lg-price, .gift-sm-price {
+    color: gray;
+}
+
+.gift-sm-progressbar {
+    background-color: white;
+}
+
+.gift-caption {
+    font-size: 20px;
+}
+
+.gift-title {
+    font-size: 30px;
+    padding-bottom: 10px;
+    text-align: center !important;
+}
+
+.grid-container-half {
+    margin-top: 20px;
+    grid-gap: 10px;
+    display: grid;
+    grid-template-rows: 150px minmax(100px, 500px);
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+            "gift-for gift-from"
+            "description comments";
+}
+.grid-container {
+    margin-top: 50px;
+    width: 100%;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-rows: auto;
+    grid-template-columns: 60% auto;
+    grid-template-areas:
+        "image contribute-progress-deadline"
+;
+}
+
+.contribute-button-container {
+    width:100%;
+    height: 45px;
+}
+
+.contribute-button{
+    background-color: #ffea83;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 100%;
+    font-size: 25px;
+    height: 100%;
+    cursor: pointer;
+    font-weight: lighter;
+
+}
+
+
+.modal-body {
+    display: flex;
+}
+
+.modal-gift-thumbnail {
+    max-height: 150px;
+    max-width: 150px;
+}
+
+.gift-card-body {
+    background-color: #EAECEE;
+}
+
+.modal-gift-thumbnail-container {
+    height: 150px;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contribute-button {
+    height: 100% !important;
+}
+
+.gift-att-container {
+    padding-top: 7px;
+    background-color: #EAECEE;
+    margin-top: 20px;
+    height: 90px;
+}
+
+.grid-gift-image {
+    grid-area: image;
+}
+
+.grid-gift-info {
+    grid-area: contribute-progress-deadline;
+}
+
+.grid-gift-for {
+    grid-area: gift-for;
+}
+
+.grid-gift-from {
+    grid-area: gift-from;
+}
+
+.grid-gift-description {
+    grid-area: description;
+}
+
+.grid-gift-comments{
+    grid-area: comments;
+}
+
+.card-email-container {
+    padding-left: 10px;
+    vertical-align: middle;
+    line-height: 50px;
+    text-align: center;
+}
+
+.desc-card {
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.event-date {
+    text-align: left;
+    font-weight: bold;
+    justify-content: flex-end;
+    color: #616161;
+}
+
+.user-card > div > img {
+    height: 50px;
+    width: 50px;
+}
+
+.user-card {
+    display: flex;
+}
+
+.close-button:active, .close-button:focus {
+    border: none;
+    outline: none;
+}
+
+.accordion-contribution-container {
+    padding-bottom: 10px;
+}
+
+#gift-icon {
+    margin: auto;
+    max-width: 100%;
+    max-height: 280px;
+}
+
+.gift-pro-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.giftSM-title {
+    white-space: pre-line;
+}
+
+
+.giftSM-desc > div {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.giftLG-thumbnail {
+    border-radius: 5px;
+    width: auto;
+    height: auto;
+    max-height: 420px;
+    max-width: 100%;
+}
+
+.giftLG-thumbnail-container {
+    height: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.gift-thumbnail, #gift-icon {
+    border-radius: 5px;
+    max-width: 100-x;
+}
+
+
+.hidden {
+    display: none;
+}
+
+.comment-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.comment-and-icon, .comment-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.comment-and-icon {
+    margin-bottom: 5px;
+}
+
+.create-comment-container {
+    margin-bottom: 10px;
+}
+
+.create-comment-button {
+    text-align: right;
+}
+
+
+.comment-text {
+    resize: none;
+    width: 100%;
+    margin: 0;
+    vertical-align: bottom;
+    padding: 5px;
+    border: 1px solid #CDCFD0;
+    transition: all 0.2s ease;
+    border-radius: 2px;
+}
+
+.comment-text:focus {
+    outline: none;
+    border: 1px solid #3A3B3B;
+
+}
+
+.comment-icon-container{
+    width: 20%;
+}
+
+.comment-text-container {
+    width: 100%;
+}
+
+.textarea {
+    resize: none;
+}
+
+.comment-container {
+    border-top: 2px solid #CDCFD0;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.comment-user, .card-email-container {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.comment-header > div {
+    line-height: 25px;
+    display: flex;
+}
+
+.comment-header div span {
+    align-self: flex-end;
+}
+
+.comment-date {
+    font-size: 12px;
+}
+
+#comment-error {
+    text-align: right;
+}
+
+.comment-textarea {
+    margin-bottom: 0;
+}
+
+.edit-gift {
+    position: absolute;
+    top: 0;
+    right: 25px;
+}
+
+.edit-gift:hover{
+    color: #93e4f3;
+    cursor: pointer;
+}
+
+.edit-event {
+    position: absolute;
+    top: 12px;
+    right: 45px;
+}
+.edit-event:hover{
+    color: white;
+    cursor: pointer;
+}
+
+#addAGiftId {
+    background-color: #ffea83;
+    border-color: #ffea83;
+    color: black;
+    font-size: 1rem;
+}
+
+#getStartedId {
+    color: black;
+    border-color: #ffea83;
+    background-color: #ffea83;
+}
+
+@media (max-width: 768px) {
+    #addAGiftId {
+        background-color: #ffea83;
+        border-color: #ffea83;
+        color: black;
+        font-size: 0.8rem;
+    }
+}
+
+#CardFooterButton {
+    background-color: #ffea83;
+    color: black;
+}

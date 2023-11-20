@@ -1,0 +1,26 @@
+.about-page-container {
+    display: flex;
+    margin: 30px 0 30px 0;
+}
+
+.about-section-title {
+    font-weight: bold;
+    font-size: 3.5vw;
+}
+
+/*.about-page-container > div {*/
+/*    width: 50%;*/
+/*}*/
+
+.about-info-container > div{
+    position: relative;
+    text-align: center;
+    /*transform: translateY(-50%);*/
+    top: 35%;
+}
+
+.about-grey-background {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: #F4F6F6;
+}

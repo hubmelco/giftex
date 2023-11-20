@@ -1,0 +1,14 @@
+.formatLine {
+    display: flex;
+}
+
+#privateinfo {
+    padding-left: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.errors {
+    color: red;
+    text-align: center;
+}

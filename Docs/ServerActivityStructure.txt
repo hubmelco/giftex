@@ -1,0 +1,24 @@
+COMMENT
+    otherEmail - email of target
+    ID - giftID
+    val - comment text
+
+CONTRIBUTE
+    otherEmail - email of target
+    ID - giftID
+    val - amount
+
+POST_GIFT
+    otherEmail - email of target
+    ID - giftID
+    val - NULL
+
+ADD_FRIEND
+    otherEmail - email of target
+    ID - NULL
+    val - NULL
+
+EVENT (TBD)
+    otherEmail - NULL
+    ID - eventID
+    val - NULL

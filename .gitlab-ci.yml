@@ -1,0 +1,236 @@
+services:
+  - mysql:latest
+
+image: node:14.17.6
+
+variables:
+  DB_CONNECTION: 'mysql://root:123456@mysql/wishwell'
+  JWT_SECRET: '$JWT_SECRET'
+  STRIPE_KEY: '$STRIPE_KEY'
+  STRIPE_WEBHOOK_ENDPOINT_SECRET: '$STRIPE_WEBHOOK_ENDPOINT_SECRET'
+  MYSQL_ROOT_PASSWORD: '123456'
+  MYSQL_DATABASE: 'wishwell'
+
+# Template non-modifiable backend cache details so theres no duplication
+.backend_cache:
+  cache:
+    key:
+      files: 
+        - ./Server/package.json
+      prefix: backend
+    paths: 
+      - ./Server/.npm
+    policy: pull
+
+# Template non-modifiable frontend cache details so theres no duplication
+.frontend_cache:
+  cache:
+    key:
+      files: 
+        - ./WebApp/react-app/package.json
+      prefix: frontend
+    paths: 
+    - ./WebApp/react-app/.npm
+    policy: pull
+
+# Create the global cache for the frontend and backend using the template details
+cache:
+  - key:
+      files: 
+        - ./WebApp/react-app/package.json
+      prefix: frontend
+  - paths: 
+      - ./WebApp/react-app/.npm
+  - key:
+      files: 
+        - ./Server/package.json
+      prefix: backend
+  - paths: 
+      - ./Server/.npm
+
+stages:
+  - setup
+  - test
+  - deploy
+
+install_frontend_dependecies:
+  stage: setup
+  cache:
+    key:
+      files: 
+        - ./WebApp/react-app/package.json
+      prefix: frontend
+    paths: 
+      - ./WebApp/react-app/.npm
+  before_script:
+    - cd ./WebApp/react-app
+  script:
+    - npm ci --cache .npm --prefer-offline
+
+install_backend_dependencies:
+  stage: setup
+  cache:
+    key:
+      files: 
+        - ./Server/package.json
+      prefix: backend
+    paths: 
+      - ./Server/.npm
+  before_script:
+    - cd ./Server
+  script:
+    - npm ci --cache .npm --prefer-offline
+
+
+back_end_jest_tests:
+  stage: test
+  extends: .backend_cache
+  before_script:
+    - cd ./Server
+    - npm ci --cache .npm --prefer-offline
+  script:
+    - npm run test
+
+
+front_end_jest_tests:
+  stage: test
+  extends: .frontend_cache
+  before_script:
+    - cd ./WebApp/react-app
+    - npm ci --cache .npm --prefer-offline
+  script:
+    - npm run test
+
+# Setup the database, instead of how I am doing it you could just run a js file that populates it.
+# OLD DATABASE
+# build database:
+#   stage: build
+#   image: mysql
+#   script:
+#     #Setup the tables for the database. If this fails you will need to add the schema giftaccount on the mysql server.
+#     - echo "use giftaccount;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     # Creates all the tables that are needed. (From our TableDataSetup)
+#     - echo "drop table IF EXISTS Account;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "CREATE TABLE Account(
+#       name VARCHAR(100) NOT NULL,
+#       email VARCHAR(320) NOT NULL,
+#       password VARCHAR(100) NOT NULL,
+#       DOB DATE,
+#       priv BOOL NOT NULL,
+#       pic mediumblob,
+#       bio VARCHAR(1000),
+#       primAddressID INT NOT NULL default 0,
+#       wallet INT NOT NULL default 0,
+#       PRIMARY KEY (email)
+#       );" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "show tables;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+
+#     - echo "drop table IF EXISTS Gift;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "CREATE TABLE Gift(
+#       giftID INT NOT NULL AUTO_INCREMENT,
+#       name VARCHAR(100) NOT NULL,
+#       accountEmail VARCHAR(320) NOT NULL,
+#       receivingEmail VARCHAR(320) NOT NULL,
+#       price INT NOT NULL,
+#       funds INT NOT NULL default 0,
+#       thumbnail VARCHAR(1000),
+#       description VARCHAR(1000),
+#       link VARCHAR(1000),
+#       priv BOOL NOT NULL,
+#       date DATETIME,
+#       deadline DATE,
+#       popularity INT default 500,
+#       PRIMARY KEY (giftID)
+#       );" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+
+#     - echo "drop table IF EXISTS Address;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "CREATE TABLE Address(
+#       streetAddress VARCHAR(320) NOT NULL,
+#       city VARCHAR(320) NOT NULL,
+#       state VARCHAR(320) NOT NULL,
+#       zipcode INT NOT NULL,
+#       addressID INT NOT NULL,
+#       email VARCHAR(320) NOT NULL,
+#       FOREIGN KEY (email) REFERENCES Account(email),
+#       PRIMARY KEY (email, addressID)
+#       );" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+
+#     - echo "drop table IF EXISTS Image;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "CREATE TABLE Image(
+#       image VARCHAR(1000) NOT NULL,
+#       giftID INT NOT NULL,
+#       FOREIGN KEY (giftID) REFERENCES Gift(giftID)
+#       );" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+
+#     - echo "drop table IF EXISTS Account_Friends;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "CREATE TABLE Account_Friends(
+#       friends VARCHAR(320) NOT NULL,
+#       email VARCHAR(320) NOT NULL,
+#       FOREIGN KEY (email) REFERENCES Account(email),
+#       FOREIGN KEY (friends) REFERENCES Account(email),
+#       PRIMARY KEY (email, friends)
+#       );" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+
+#     - echo "drop table IF EXISTS Gift_Account;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "CREATE TABLE Gift_Account(
+#       email VARCHAR(320) NOT NULL,
+#       giftID INT NOT NULL,
+#       FOREIGN KEY (email) REFERENCES Account(email),
+#       FOREIGN KEY (giftID) REFERENCES Gift(giftID)
+#       );" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+
+#     - echo "drop table IF EXISTS Gift_Log;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "CREATE TABLE Gift_Log(
+#       email VARCHAR(320) NOT NULL,
+#       amount INT NOT NULL,
+#       giftID INT NOT NULL,
+#       FOREIGN KEY (giftID) REFERENCES Gift(giftID),
+#       FOREIGN KEY (email) REFERENCES Account(email),
+#       PRIMARY KEY (email, giftID)
+#       );" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+
+#     - echo "drop table IF EXISTS Gift_Comments;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "CREATE TABLE Gift_Comments(
+#       email VARCHAR(320) NOT NULL,
+#       date DATETIME NOT NULL,
+#       comment VARCHAR(1000) NOT NULL,
+#       giftID INT NOT NULL,
+#       FOREIGN KEY (giftID) REFERENCES Gift(giftID)
+#       );" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+
+#     - echo "drop table IF EXISTS Account_Activity;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "CREATE TABLE Account_Activity(
+#       email VARCHAR(320) NOT NULL,
+#       date DATETIME NOT NULL,
+#       type ENUM('COMMENT', 'CONTRIBUTE', 'POST_GIFT', 'ADD_FRIEND', 'EVENT') NOT NULL,
+#       otherEmail VARCHAR(320),
+#       ID INT,
+#       val VARCHAR(1000),
+#       FOREIGN KEY (email) REFERENCES Account(email)
+#       );" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+
+#     - echo "drop table IF EXISTS Friend_Request;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "CREATE TABLE Friend_Request(
+#       date Date NOT NULL,
+#       receivingEmail VARCHAR(320) NOT NULL,
+#       sendingEmail VARCHAR(320) NOT NULL,
+#       FOREIGN KEY (receivingEmail) REFERENCES Account(email),
+#       FOREIGN KEY (sendingEmail) REFERENCES Account(email),
+#       PRIMARY KEY (receivingEmail, sendingEmail)
+#       );" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+
+#     - echo "drop table IF EXISTS Transaction_ID;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "CREATE TABLE Transaction_ID(
+#       id VARCHAR(100)
+#       );" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+
+#     # Insert data into the tables. (From our TbaleDataFill) I only did it for the account table just to figure out how this works.
+#     - echo "insert into Account(name, email, password, DOB, priv, bio, pic, wallet)
+#       values('Brendan', 'eckerb@msoe.edu', '$2b$08$prK4hgKBZJD0j.Ba.1ToxuBktJvRSjUjwp/D36Ev.GvNeIycyrRGe', '2020-10-25', true, 'This is my bio', '', 0);" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "insert into Account(name, email, password, DOB, priv, bio, pic,  wallet)
+#       values('David', 'yangda@msoe.edu', '$2b$08$mxKH1G7An9bzqndlp/Ot9.xl96Nos5VktuVkDMxiDtVj08v8RL5BS', '2020-10-25', false, 'This is a great bio!', '', 1000);" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "insert into Account(name, email, password, DOB, priv, bio, pic, wallet)
+#       values('Jeromy', 'schultzjf@msoe.edu', '$2b$08$BITh2FDNZBxmmMeUMZkUX.Ma5L51L/TXoHpKJoF5ayFarDuxVnJ4m', '2020-10-25', false, 'This is the best BIO?', '', 5000);" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "insert into Account(name, email, password, DOB, priv, bio, pic, wallet)
+#       values('Daniel', 'atkinsond@msoe.edu', '$2b$08$F44MNm0MqgF/9dlVAsxLB.x53W6ZTt77b4tXErNDbSi1VIMmoE9Tq', '2020-10-25', false, 'BIO', '', 0);" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+#     - echo "select * from Account;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"

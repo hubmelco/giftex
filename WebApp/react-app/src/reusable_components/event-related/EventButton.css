@@ -1,0 +1,12 @@
+#addAnEventId{
+    background-color: #ffea83;
+    color: black;
+    border-color: #ffea83;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    #addAnEventId {
+        font-size: 0.8rem;
+    }
+}

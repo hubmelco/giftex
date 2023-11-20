@@ -1,0 +1,8 @@
+.friends-name-link, .friends-name-link:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.friendPic{
+    object-fit: cover;
+}

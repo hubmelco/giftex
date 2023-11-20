@@ -1,0 +1,60 @@
+:root {
+    --primary-green: #93e4f3;
+}
+
+
+body {
+    overflow-x: hidden;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.content-container {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.black-link, .black-link:hover {
+    color: black;
+}
+
+.grey-background {
+    background-color: #F4F6F6;
+}
+
+.padding-container {
+    padding-top: 10px;
+}
+
+.no-dec-link, .no-dec-link:hover, .no-dec-link:active {
+    color: black;
+}
+
+.section-header {
+    padding: 10px 0;
+}
+
+.paypal-container {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.paypal-container > div {
+    padding: 5px;
+}
+
+.paypal-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.form-error-message {
+    color: red;
+    font-size: 12px;
+}
+
+.textFont{
+    font-family: 'Montserrat', sans-serif;
+    white-space: pre-line;
+}

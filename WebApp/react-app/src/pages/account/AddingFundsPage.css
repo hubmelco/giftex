@@ -1,0 +1,22 @@
+#adding{
+    margin-left: 50%;
+    margin-right: 50%;
+}
+
+#label{
+    margin-top: 20px;
+    width: 97px;
+}
+
+#amount{
+    margin-top: 20px;
+    margin-left: 50%;
+    margin-right: 50%;
+}
+
+#payButton{
+    margin-top: 20px;
+    margin-left: 45%;
+    margin-right: 50%;
+    width: 100px;
+}

@@ -1,0 +1,92 @@
+{
+  "name": "react-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@feathersjs/client": "^4.5.11",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "@syncfusion/ej2-react-buttons": "^19.3.53",
+    "@syncfusion/ej2-react-inplace-editor": "^19.3.53",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "antd": "^4.18.4",
+    "axios": "^0.21.0",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.5.3",
+    "bootstrap-autocomplete": "^2.3.7",
+    "dotenv": "^8.2.0",
+    "emailjs-com": "^2.6.4",
+    "html5-file-selector": "^2.1.0",
+    "path": "^0.12.7",
+    "react": "^17.0.1",
+    "react-autocomplete": "^1.8.1",
+    "react-bootstrap": "^1.5.0",
+    "react-dom": "^17.0.1",
+    "react-modal": "^3.11.2",
+    "react-multi-carousel": "^2.6.1",
+    "react-paypal-button-v2": "^2.6.2",
+    "react-promise-tracker": "^2.1.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.0",
+    "react-select": "^5.2.2",
+    "react-toastify": "^8.1.0",
+    "react-typeahead": "^2.0.0-alpha.8",
+    "react-typeahead-component": "^0.9.0",
+    "socket.io-client": "^2.4.0",
+    "tedious": "^11.0.7",
+    "unirest": "^0.6.0",
+    "web-vitals": "^0.2.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "jest",
+    "eject": "react-scripts eject"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
+    "verbose": true,
+    "moduleNameMapper": {
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
+    },
+    "setupFiles": [
+      "./src/setupTest.js"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.7",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.2",
+    "identity-obj-proxy": "^3.0.0",
+    "react-google-login": "^5.2.2",
+    "react-test-renderer": "^17.0.2",
+    "sequelize": "^6.6.2"
+  },
+  "author": "",
+  "license": "ISC"
+}

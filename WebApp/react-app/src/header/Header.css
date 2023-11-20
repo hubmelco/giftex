@@ -1,0 +1,118 @@
+.header {
+    width: 100% !important;
+    height: 80px !important;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+    background-color: #93e4f3;
+    padding-left:5%;
+    padding-right: 2%;
+}
+
+.flex {
+    display:flex;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-space-between {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-gap {
+    gap: 0.5rem;
+}
+
+.notification-box {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.dropdown-menu.show {
+    min-width: 25rem;
+}
+
+.notification-button {
+    border: 0;
+    color: black;
+    font-size: 0.75rem;
+}
+
+.span-icon {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    transform: translateX(-5px);
+}
+
+.header-row{
+    width: inherit;
+}
+
+#header-search{
+    width: 80%;
+}
+
+#info-icon {
+    border:none;
+    background-color: transparent;
+}
+
+#bell-icon {
+    border:none;
+    background-color: transparent;
+    width: 35px;
+}
+
+#bell-icon.dropdown-toggle.btn.btn-warning::after {
+   transform: translateX(-26px);
+}
+
+.logo-column {
+    display: flex;
+    justify-content: left;
+    padding-left: 10%;
+    padding-bottom: 20px;
+
+}
+
+.logo {
+    height: 165px;
+    width: 200px;
+}
+
+#signup-button{
+    background-color: #ffea83;
+}
+
+.test {
+    padding-right: 10px;
+}
+
+#privateinfo {
+    padding-left: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.formatLine {
+    display: flex;
+}
+
+.features {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/*.fas fa-book-open {*/
+/*    backgroundColor: '#93e4f3';*/
+/*    color: black;*/
+/*}*/
+
+
+
